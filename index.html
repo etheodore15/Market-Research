@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SharpenIt Research Agent</title>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --card: #161b22;
+      --border: #30363d;
+      --text: #e6edf3;
+      --muted: #8b949e;
+      --accent: #58a6ff;
+      --green: #3fb950;
+      --orange: #d29922;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    .container { max-width: 860px; margin: 0 auto; padding: 2rem 1.5rem; }
+    header { text-align: center; padding: 3rem 0 2rem; }
+    header h1 { font-size: 2.2rem; margin-bottom: 0.5rem; }
+    header h1 span { color: var(--accent); }
+    .tagline { color: var(--muted); font-size: 1.1rem; }
+    .badge {
+      display: inline-block;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 2rem;
+      padding: 0.3rem 1rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-top: 1rem;
+    }
+    .banner {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      margin: 2rem 0;
+      font-family: 'SF Mono', 'Cascadia Code', 'Fira Code', monospace;
+      font-size: 0.9rem;
+      white-space: pre;
+      overflow-x: auto;
+      color: var(--green);
+      line-height: 1.5;
+    }
+    h2 {
+      font-size: 1.4rem;
+      margin: 2.5rem 0 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .modules {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .module {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
+      padding: 1.25rem;
+    }
+    .module-num {
+      font-size: 0.8rem;
+      color: var(--accent);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.25rem;
+    }
+    .module h3 { font-size: 1.05rem; margin-bottom: 0.4rem; }
+    .module p { color: var(--muted); font-size: 0.9rem; }
+    .setup {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .setup ol {
+      padding-left: 1.25rem;
+    }
+    .setup li {
+      margin-bottom: 0.75rem;
+      color: var(--text);
+    }
+    code {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 0.375rem;
+      padding: 0.15rem 0.4rem;
+      font-family: 'SF Mono', 'Cascadia Code', 'Fira Code', monospace;
+      font-size: 0.85em;
+    }
+    pre {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 0.5rem;
+      padding: 1rem;
+      margin: 0.75rem 0;
+      overflow-x: auto;
+      font-size: 0.9rem;
+    }
+    pre code {
+      background: none;
+      border: none;
+      padding: 0;
+    }
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .info-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
+      padding: 1.25rem;
+      text-align: center;
+    }
+    .info-item .label { color: var(--muted); font-size: 0.85rem; }
+    .info-item .value { font-size: 1.3rem; font-weight: 600; margin-top: 0.25rem; }
+    .info-item .value.accent { color: var(--accent); }
+    .info-item .value.green { color: var(--green); }
+    .info-item .value.orange { color: var(--orange); }
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+      padding: 3rem 0 2rem;
+      border-top: 1px solid var(--border);
+      margin-top: 3rem;
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1><span>SharpenIt</span> Research Agent</h1>
+      <p class="tagline">Live web-searched market research &amp; launch planning for SharpenIt</p>
+      <span class="badge">sharpenit.com.au &middot; ABN 19 245 621 227</span>
+    </header>
+
+    <div class="banner">&#9556;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9559;
+&#9553;   SharpenIt Live Research Agent v1.0     &#9553;
+&#9553;   sharpenit.com.au &middot; ABN 19 245 621 227  &#9553;
+&#9562;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9565;
+
+[1/6] &#128269; Competitor Analysis
+&#127760; Searching: knife sharpening service australia 2026...
+&#9989; Competitor Analysis complete (1,842 words)
+
+[2/6] &#128269; Target Audience
+&#127760; Searching: australian cooking trends 2026...
+&#9989; Target Audience complete (1,650 words)
+
+&#9989; All research complete.
+&#128196; Report saved: sharpenit-launch-plan-2026-03-30.md</div>
+
+    <div class="info-grid">
+      <div class="info-item">
+        <div class="label">Research Modules</div>
+        <div class="value accent">6</div>
+      </div>
+      <div class="info-item">
+        <div class="label">AI Model</div>
+        <div class="value green">Claude Opus</div>
+      </div>
+      <div class="info-item">
+        <div class="label">Web Search</div>
+        <div class="value orange">Live</div>
+      </div>
+      <div class="info-item">
+        <div class="label">Output</div>
+        <div class="value accent">Markdown</div>
+      </div>
+    </div>
+
+    <h2>Research Modules</h2>
+    <div class="modules">
+      <div class="module">
+        <div class="module-num">Module 1</div>
+        <h3>Competitor Analysis</h3>
+        <p>Every knife sharpening service in Australia — postal, local, DIY — with pricing and positioning.</p>
+      </div>
+      <div class="module">
+        <div class="module-num">Module 2</div>
+        <h3>Target Audience</h3>
+        <p>Consumer data, 4 detailed personas with demographics, psychographics, and triggers.</p>
+      </div>
+      <div class="module">
+        <div class="module-num">Module 3</div>
+        <h3>Marketing Channels</h3>
+        <p>Digital benchmarks, search volume data, and a $500/mo channel mix recommendation.</p>
+      </div>
+      <div class="module">
+        <div class="module-num">Module 4</div>
+        <h3>90-Day Launch Plan</h3>
+        <p>Week-by-week tactical plan with real media targets, events, and milestones.</p>
+      </div>
+      <div class="module">
+        <div class="module-num">Module 5</div>
+        <h3>Campaign Strategy</h3>
+        <p>Brand voice, 3 campaigns, social calendar, email sequence, and influencer hit list.</p>
+      </div>
+      <div class="module">
+        <div class="module-num">Module 6</div>
+        <h3>KPIs &amp; Financial Model</h3>
+        <p>12-month projections, unit economics, CAC targets, and pivot triggers.</p>
+      </div>
+    </div>
+
+    <h2>Quick Start</h2>
+    <div class="setup">
+      <ol>
+        <li>Clone the repo:
+          <pre><code>git clone https://github.com/etheodore15/Market-Research.git
+cd Market-Research</code></pre>
+        </li>
+        <li>Install dependencies:
+          <pre><code>npm install</code></pre>
+        </li>
+        <li>Add your API key:
+          <pre><code>cp .env.example .env
+# Edit .env and add your ANTHROPIC_API_KEY</code></pre>
+        </li>
+        <li>Run the agent:
+          <pre><code>npm start</code></pre>
+        </li>
+      </ol>
+    </div>
+
+    <h2>How It Works</h2>
+    <div class="setup">
+      <ol>
+        <li>The agent runs 6 sequential research modules using <strong>Claude Opus</strong> with <strong>live web search</strong> enabled.</li>
+        <li>Each module streams results to the terminal in real time as Claude searches the web and writes analysis.</li>
+        <li>On completion, the full report is compiled into a timestamped <strong>markdown file</strong>.</li>
+        <li>A <strong>desktop notification</strong> alerts you when the research is done.</li>
+      </ol>
+    </div>
+
+    <h2>Tech Stack</h2>
+    <div class="info-grid">
+      <div class="info-item">
+        <div class="value accent" style="font-size:1rem;">Node.js</div>
+        <div class="label">Runtime</div>
+      </div>
+      <div class="info-item">
+        <div class="value green" style="font-size:1rem;">Anthropic SDK</div>
+        <div class="label">AI Provider</div>
+      </div>
+      <div class="info-item">
+        <div class="value orange" style="font-size:1rem;">node-notifier</div>
+        <div class="label">Notifications</div>
+      </div>
+      <div class="info-item">
+        <div class="value accent" style="font-size:1rem;">dotenv</div>
+        <div class="label">Config</div>
+      </div>
+    </div>
+
+    <footer>
+      <p><a href="https://sharpenit.com.au">sharpenit.com.au</a> &middot; ABN 19 245 621 227</p>
+      <p style="margin-top:0.5rem;">Built with the <a href="https://docs.anthropic.com/en/docs/agents-and-tools/tool-use/web-search">Anthropic Web Search API</a></p>
+    </footer>
+  </div>
+</body>
+</html>
