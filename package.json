@@ -1,0 +1,13 @@
+{
+  "name": "sharpenit-research-agent",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "node agent.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "latest",
+    "dotenv": "latest",
+    "node-notifier": "latest"
+  }
+}
