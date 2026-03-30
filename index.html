@@ -14,6 +14,7 @@
       --accent: #58a6ff;
       --green: #3fb950;
       --orange: #d29922;
+      --red: #f85149;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -23,261 +24,580 @@
       line-height: 1.6;
       min-height: 100vh;
     }
-    .container { max-width: 860px; margin: 0 auto; padding: 2rem 1.5rem; }
-    header { text-align: center; padding: 3rem 0 2rem; }
-    header h1 { font-size: 2.2rem; margin-bottom: 0.5rem; }
+    .container { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+    /* Header */
+    header { text-align: center; padding: 2.5rem 0 1.5rem; }
+    header h1 { font-size: 2.2rem; margin-bottom: 0.4rem; }
     header h1 span { color: var(--accent); }
-    .tagline { color: var(--muted); font-size: 1.1rem; }
+    .tagline { color: var(--muted); font-size: 1.05rem; }
     .badge {
       display: inline-block;
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 2rem;
-      padding: 0.3rem 1rem;
+      padding: 0.25rem 0.9rem;
       font-size: 0.85rem;
       color: var(--muted);
-      margin-top: 1rem;
+      margin-top: 0.75rem;
     }
-    .banner {
+
+    /* Start panel */
+    #start-panel {
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 0.75rem;
-      padding: 1.5rem;
+      padding: 2rem;
       margin: 2rem 0;
-      font-family: 'SF Mono', 'Cascadia Code', 'Fira Code', monospace;
+      text-align: center;
+    }
+    #start-panel label {
+      display: block;
+      color: var(--muted);
       font-size: 0.9rem;
-      white-space: pre;
-      overflow-x: auto;
-      color: var(--green);
-      line-height: 1.5;
+      margin-bottom: 0.5rem;
+      text-align: left;
     }
-    h2 {
-      font-size: 1.4rem;
-      margin: 2.5rem 0 1rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 1px solid var(--border);
-    }
-    .modules {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 1rem;
-      margin: 1.5rem 0;
-    }
-    .module {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 0.75rem;
-      padding: 1.25rem;
-    }
-    .module-num {
-      font-size: 0.8rem;
-      color: var(--accent);
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 0.25rem;
-    }
-    .module h3 { font-size: 1.05rem; margin-bottom: 0.4rem; }
-    .module p { color: var(--muted); font-size: 0.9rem; }
-    .setup {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 0.75rem;
-      padding: 1.5rem;
-      margin: 1.5rem 0;
-    }
-    .setup ol {
-      padding-left: 1.25rem;
-    }
-    .setup li {
-      margin-bottom: 0.75rem;
-      color: var(--text);
-    }
-    code {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 0.375rem;
-      padding: 0.15rem 0.4rem;
-      font-family: 'SF Mono', 'Cascadia Code', 'Fira Code', monospace;
-      font-size: 0.85em;
-    }
-    pre {
+    #api-key-input {
+      width: 100%;
+      padding: 0.7rem 1rem;
       background: var(--bg);
       border: 1px solid var(--border);
       border-radius: 0.5rem;
-      padding: 1rem;
-      margin: 0.75rem 0;
-      overflow-x: auto;
+      color: var(--text);
+      font-family: 'SF Mono', 'Cascadia Code', monospace;
       font-size: 0.9rem;
+      margin-bottom: 1rem;
     }
-    pre code {
-      background: none;
+    #api-key-input:focus { outline: none; border-color: var(--accent); }
+    .key-note {
+      color: var(--muted);
+      font-size: 0.8rem;
+      margin-bottom: 1.25rem;
+      text-align: left;
+    }
+    #start-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 2.5rem;
+      background: var(--accent);
+      color: #fff;
       border: none;
-      padding: 0;
+      border-radius: 0.5rem;
+      font-size: 1.05rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s;
     }
-    .info-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 1rem;
-      margin: 1.5rem 0;
-    }
-    .info-item {
+    #start-btn:hover { opacity: 0.85; }
+    #start-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    /* Progress bar */
+    #progress-bar {
+      display: none;
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 0.75rem;
-      padding: 1.25rem;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .progress-track {
+      width: 100%;
+      height: 6px;
+      background: var(--border);
+      border-radius: 3px;
+      overflow: hidden;
+      margin-bottom: 0.75rem;
+    }
+    .progress-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 3px;
+      transition: width 0.4s ease;
+      width: 0%;
+    }
+    #progress-label { color: var(--muted); font-size: 0.9rem; }
+
+    /* Module cards */
+    .module-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 0.75rem;
+      margin: 1.5rem 0;
+    }
+    .mod-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 0.6rem;
+      padding: 1rem 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .mod-card .mod-icon {
+      font-size: 1.3rem;
+      flex-shrink: 0;
+      width: 2rem;
       text-align: center;
     }
-    .info-item .label { color: var(--muted); font-size: 0.85rem; }
-    .info-item .value { font-size: 1.3rem; font-weight: 600; margin-top: 0.25rem; }
-    .info-item .value.accent { color: var(--accent); }
-    .info-item .value.green { color: var(--green); }
-    .info-item .value.orange { color: var(--orange); }
+    .mod-card .mod-info { flex: 1; min-width: 0; }
+    .mod-card .mod-num { font-size: 0.75rem; color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
+    .mod-card .mod-name { font-size: 0.95rem; font-weight: 500; }
+    .mod-card .mod-words { font-size: 0.8rem; color: var(--muted); }
+    .mod-card.pending .mod-icon::after { content: "\u23F3"; }
+    .mod-card.running .mod-icon::after { content: "\uD83D\uDD0D"; }
+    .mod-card.done .mod-icon::after { content: "\u2705"; }
+    .mod-card.error .mod-icon::after { content: "\u274C"; }
+    .mod-card.running { border-color: var(--accent); }
+    .mod-card.done { border-color: var(--green); }
+    .mod-card.error { border-color: var(--red); }
+
+    /* Output terminal */
+    #output-area {
+      display: none;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
+      margin: 1.5rem 0;
+      overflow: hidden;
+    }
+    #output-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+      background: rgba(0,0,0,0.2);
+    }
+    #output-header span { font-weight: 600; font-size: 0.95rem; }
+    #output-header .search-indicator {
+      color: var(--orange);
+      font-size: 0.85rem;
+      display: none;
+    }
+    #output-content {
+      padding: 1.25rem;
+      font-family: 'SF Mono', 'Cascadia Code', 'Fira Code', monospace;
+      font-size: 0.85rem;
+      line-height: 1.7;
+      max-height: 500px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      color: var(--text);
+    }
+
+    /* Download bar */
+    #download-bar {
+      display: none;
+      background: var(--card);
+      border: 1px solid var(--green);
+      border-radius: 0.75rem;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      text-align: center;
+    }
+    #download-bar p { margin-bottom: 0.75rem; color: var(--green); font-weight: 600; font-size: 1.05rem; }
+    #download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.65rem 1.75rem;
+      background: var(--green);
+      color: #fff;
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    #download-btn:hover { opacity: 0.85; }
+
+    /* Error */
+    .error-msg {
+      background: rgba(248,81,73,0.1);
+      border: 1px solid var(--red);
+      color: var(--red);
+      border-radius: 0.5rem;
+      padding: 0.75rem 1rem;
+      margin: 1rem 0;
+      font-size: 0.9rem;
+      display: none;
+    }
+
     footer {
       text-align: center;
       color: var(--muted);
       font-size: 0.85rem;
-      padding: 3rem 0 2rem;
+      padding: 2.5rem 0 2rem;
       border-top: 1px solid var(--border);
-      margin-top: 3rem;
+      margin-top: 2.5rem;
     }
     footer a { color: var(--accent); text-decoration: none; }
     footer a:hover { text-decoration: underline; }
-    a { color: var(--accent); text-decoration: none; }
-    a:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
   <div class="container">
     <header>
       <h1><span>SharpenIt</span> Research Agent</h1>
-      <p class="tagline">Live web-searched market research &amp; launch planning for SharpenIt</p>
+      <p class="tagline">Live web-searched market research &amp; launch planning</p>
       <span class="badge">sharpenit.com.au &middot; ABN 19 245 621 227</span>
     </header>
 
-    <div class="banner">&#9556;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9559;
-&#9553;   SharpenIt Live Research Agent v1.0     &#9553;
-&#9553;   sharpenit.com.au &middot; ABN 19 245 621 227  &#9553;
-&#9562;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9565;
-
-[1/6] &#128269; Competitor Analysis
-&#127760; Searching: knife sharpening service australia 2026...
-&#9989; Competitor Analysis complete (1,842 words)
-
-[2/6] &#128269; Target Audience
-&#127760; Searching: australian cooking trends 2026...
-&#9989; Target Audience complete (1,650 words)
-
-&#9989; All research complete.
-&#128196; Report saved: sharpenit-launch-plan-2026-03-30.md</div>
-
-    <div class="info-grid">
-      <div class="info-item">
-        <div class="label">Research Modules</div>
-        <div class="value accent">6</div>
-      </div>
-      <div class="info-item">
-        <div class="label">AI Model</div>
-        <div class="value green">Claude Opus</div>
-      </div>
-      <div class="info-item">
-        <div class="label">Web Search</div>
-        <div class="value orange">Live</div>
-      </div>
-      <div class="info-item">
-        <div class="label">Output</div>
-        <div class="value accent">Markdown</div>
-      </div>
+    <div id="start-panel">
+      <label for="api-key-input">Anthropic API Key</label>
+      <input type="password" id="api-key-input" placeholder="sk-ant-api03-..." autocomplete="off" />
+      <p class="key-note">Your key is sent directly to the Anthropic API and is never stored or transmitted elsewhere.</p>
+      <div class="error-msg" id="error-msg"></div>
+      <button id="start-btn">Start Research</button>
     </div>
 
-    <h2>Research Modules</h2>
-    <div class="modules">
-      <div class="module">
-        <div class="module-num">Module 1</div>
-        <h3>Competitor Analysis</h3>
-        <p>Every knife sharpening service in Australia — postal, local, DIY — with pricing and positioning.</p>
-      </div>
-      <div class="module">
-        <div class="module-num">Module 2</div>
-        <h3>Target Audience</h3>
-        <p>Consumer data, 4 detailed personas with demographics, psychographics, and triggers.</p>
-      </div>
-      <div class="module">
-        <div class="module-num">Module 3</div>
-        <h3>Marketing Channels</h3>
-        <p>Digital benchmarks, search volume data, and a $500/mo channel mix recommendation.</p>
-      </div>
-      <div class="module">
-        <div class="module-num">Module 4</div>
-        <h3>90-Day Launch Plan</h3>
-        <p>Week-by-week tactical plan with real media targets, events, and milestones.</p>
-      </div>
-      <div class="module">
-        <div class="module-num">Module 5</div>
-        <h3>Campaign Strategy</h3>
-        <p>Brand voice, 3 campaigns, social calendar, email sequence, and influencer hit list.</p>
-      </div>
-      <div class="module">
-        <div class="module-num">Module 6</div>
-        <h3>KPIs &amp; Financial Model</h3>
-        <p>12-month projections, unit economics, CAC targets, and pivot triggers.</p>
-      </div>
+    <div id="progress-bar">
+      <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+      <div id="progress-label">Starting...</div>
     </div>
 
-    <h2>Quick Start</h2>
-    <div class="setup">
-      <ol>
-        <li>Clone the repo:
-          <pre><code>git clone https://github.com/etheodore15/Market-Research.git
-cd Market-Research</code></pre>
-        </li>
-        <li>Install dependencies:
-          <pre><code>npm install</code></pre>
-        </li>
-        <li>Add your API key:
-          <pre><code>cp .env.example .env
-# Edit .env and add your ANTHROPIC_API_KEY</code></pre>
-        </li>
-        <li>Run the agent:
-          <pre><code>npm start</code></pre>
-        </li>
-      </ol>
+    <div class="module-cards" id="module-cards"></div>
+
+    <div id="output-area">
+      <div id="output-header">
+        <span id="output-title">Output</span>
+        <span class="search-indicator" id="search-indicator">Searching the web...</span>
+      </div>
+      <div id="output-content"></div>
     </div>
 
-    <h2>How It Works</h2>
-    <div class="setup">
-      <ol>
-        <li>The agent runs 6 sequential research modules using <strong>Claude Opus</strong> with <strong>live web search</strong> enabled.</li>
-        <li>Each module streams results to the terminal in real time as Claude searches the web and writes analysis.</li>
-        <li>On completion, the full report is compiled into a timestamped <strong>markdown file</strong>.</li>
-        <li>A <strong>desktop notification</strong> alerts you when the research is done.</li>
-      </ol>
-    </div>
-
-    <h2>Tech Stack</h2>
-    <div class="info-grid">
-      <div class="info-item">
-        <div class="value accent" style="font-size:1rem;">Node.js</div>
-        <div class="label">Runtime</div>
-      </div>
-      <div class="info-item">
-        <div class="value green" style="font-size:1rem;">Anthropic SDK</div>
-        <div class="label">AI Provider</div>
-      </div>
-      <div class="info-item">
-        <div class="value orange" style="font-size:1rem;">node-notifier</div>
-        <div class="label">Notifications</div>
-      </div>
-      <div class="info-item">
-        <div class="value accent" style="font-size:1rem;">dotenv</div>
-        <div class="label">Config</div>
-      </div>
+    <div id="download-bar">
+      <p>All research complete!</p>
+      <button id="download-btn">Download Markdown Report</button>
     </div>
 
     <footer>
       <p><a href="https://sharpenit.com.au">sharpenit.com.au</a> &middot; ABN 19 245 621 227</p>
-      <p style="margin-top:0.5rem;">Built with the <a href="https://docs.anthropic.com/en/docs/agents-and-tools/tool-use/web-search">Anthropic Web Search API</a></p>
+      <p style="margin-top:0.5rem;">Powered by Claude Opus with live web search</p>
     </footer>
   </div>
+
+<script>
+const SYSTEM_PROMPT = `You are a senior market research analyst and growth strategist.
+You have been hired to conduct live market research for SharpenIt (sharpenit.com.au),
+an Australian postal knife sharpening service. ABN: 19 245 621 227.
+Service: $15/knife flat rate, Australia-wide, prepaid satchel model.
+Pre-launch status — taking orders now.
+Always search the web before writing. Cite sources with URLs.
+Be specific, tactical, and grounded in real data. Australian market focus.`;
+
+const MODULES = [
+  {
+    name: "Competitor Analysis",
+    prompt: `Search the web RIGHT NOW and find every knife sharpening service currently operating in Australia in 2026. Find:
+1. All postal/mail-in knife sharpening services in Australia — names, URLs, pricing
+2. Local knife sharpening services with strong online presence in NSW, VIC, QLD
+3. International services shipping to Australia
+4. DIY sharpening products dominating Australian retail (Bunnings, Amazon AU, etc)
+5. Any businesses that have launched or closed in the past 12 months
+6. Pricing across the full market
+
+Deliver a full competitive analysis for SharpenIt including a comparison table, market gaps, and specific positioning recommendations. Cite all sources with URLs.`
+  },
+  {
+    name: "Target Audience",
+    prompt: `Search the web for current Australian consumer data (2025-2026) to define SharpenIt's target audience. Find:
+1. Australian home cooking trends and statistics
+2. Premium kitchen knife ownership and sales data in Australia
+3. Australian restaurant and hospitality industry size — current count and revenue
+4. Hunting licence and participation data in Australia by state
+5. Australian e-commerce postal service adoption rates
+
+Build 4 detailed personas with demographics, psychographics, triggers, and objections. Ground every claim in data found. Cite all sources.`
+  },
+  {
+    name: "Marketing Channels & Budget",
+    prompt: `Search the web for Australian digital marketing benchmarks RIGHT NOW (2025-2026):
+1. Meta ads CPM and CPC benchmarks for home/kitchen in Australia
+2. Google Ads search volume for: "knife sharpening", "knife sharpening service australia", "knife sharpening sydney", "knife sharpening melbourne" — current data
+3. Fastest growing social platforms in Australia right now
+4. Australian food and cooking influencer landscape — top accounts, engagement rates
+5. SEO competition level for knife sharpening terms in Australia
+
+Recommend a specific channel mix for a $500/month launch budget with exact allocations per channel. Cite all benchmark sources with URLs.`
+  },
+  {
+    name: "90-Day Launch Plan",
+    prompt: `Search the web for:
+1. Australian food and hospitality media — publications, journalists, editors to target for PR
+2. Upcoming Australian food, hospitality, or outdoor/hunting trade events in 2026
+3. Successful Australian DTC service launch case studies from 2024-2026
+4. Current best practices for prepaid postal service launches
+5. Australian small business grant or support programs available in 2026
+
+Build a tactical week-by-week 90-day launch plan for SharpenIt. Include real media contact targets, real events, specific actions per week. Milestones, success metrics, and contingencies. Cite all sources.`
+  },
+  {
+    name: "Campaign Strategy",
+    prompt: `Search the web for:
+1. Top performing food and kitchen content on Australian Instagram and TikTok right now
+2. Australian food bloggers and cooking influencers — find real accounts with follower counts and engagement rates
+3. Australian hunting and outdoors content creators — real accounts
+4. Recent successful Australian DTC brand campaigns — what worked
+5. Current viral content formats in Australian food/cooking space 2025-2026
+
+Build a complete campaign strategy: brand voice, 3 campaign concepts, content pillars, 4-week social calendar (platform by platform), email sequence (5 emails), influencer hit list with real account handles, seasonal calendar, and 3 distinct ad creative concepts. Cite all sources.`
+  },
+  {
+    name: "KPIs & Financial Model",
+    prompt: `Search the web for:
+1. Australian e-commerce conversion rate benchmarks 2025-2026
+2. Customer acquisition cost benchmarks for Australian service businesses
+3. Email marketing performance benchmarks in Australia
+4. Repeat purchase rate data for Australian service businesses
+5. Postal/subscription service unit economics examples
+
+Build a complete KPI framework and 12-month financial model for SharpenIt:
+- Year 1 target: 2,300 customers, avg 4 knives = $138k sharpening + $44k e-com
+- Unit economics dashboard
+- CAC targets by channel
+- LTV model with repeat frequency assumptions
+- Monthly revenue milestones
+- Weekly operational KPIs
+- Warning signals and pivot triggers
+Cite all benchmark sources.`
+  }
+];
+
+// DOM refs
+const startPanel = document.getElementById("start-panel");
+const apiKeyInput = document.getElementById("api-key-input");
+const startBtn = document.getElementById("start-btn");
+const errorMsg = document.getElementById("error-msg");
+const progressBar = document.getElementById("progress-bar");
+const progressFill = document.getElementById("progress-fill");
+const progressLabel = document.getElementById("progress-label");
+const moduleCardsEl = document.getElementById("module-cards");
+const outputArea = document.getElementById("output-area");
+const outputTitle = document.getElementById("output-title");
+const searchIndicator = document.getElementById("search-indicator");
+const outputContent = document.getElementById("output-content");
+const downloadBar = document.getElementById("download-bar");
+const downloadBtn = document.getElementById("download-btn");
+
+let results = [];
+let fullReport = "";
+
+function showError(msg) {
+  errorMsg.textContent = msg;
+  errorMsg.style.display = "block";
+}
+
+function hideError() {
+  errorMsg.style.display = "none";
+}
+
+function renderModuleCards() {
+  moduleCardsEl.innerHTML = MODULES.map((m, i) => `
+    <div class="mod-card pending" id="mod-card-${i}">
+      <div class="mod-icon"></div>
+      <div class="mod-info">
+        <div class="mod-num">Module ${i + 1}</div>
+        <div class="mod-name">${m.name}</div>
+        <div class="mod-words" id="mod-words-${i}"></div>
+      </div>
+    </div>
+  `).join("");
+}
+
+function setModuleState(i, state, words) {
+  const card = document.getElementById(`mod-card-${i}`);
+  card.className = `mod-card ${state}`;
+  if (words !== undefined) {
+    document.getElementById(`mod-words-${i}`).textContent = `${words.toLocaleString()} words`;
+  }
+}
+
+function countWords(text) {
+  return text.split(/\s+/).filter(Boolean).length;
+}
+
+function updateProgress(completed, total) {
+  const pct = Math.round((completed / total) * 100);
+  progressFill.style.width = pct + "%";
+  progressLabel.textContent = `${completed} of ${total} modules complete (${pct}%)`;
+}
+
+async function runModule(apiKey, index) {
+  const mod = MODULES[index];
+  setModuleState(index, "running");
+  outputTitle.textContent = `[${index + 1}/${MODULES.length}] ${mod.name}`;
+  outputContent.textContent = "";
+  searchIndicator.style.display = "none";
+
+  let fullText = "";
+
+  const response = await fetch("https://api.anthropic.com/v1/messages", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "x-api-key": apiKey,
+      "anthropic-version": "2023-06-01",
+      "anthropic-dangerous-direct-browser-access": "true"
+    },
+    body: JSON.stringify({
+      model: "claude-opus-4-5",
+      max_tokens: 4000,
+      stream: true,
+      tools: [{ type: "web_search_20250305", name: "web_search" }],
+      system: SYSTEM_PROMPT,
+      messages: [{ role: "user", content: mod.prompt }]
+    })
+  });
+
+  if (!response.ok) {
+    const err = await response.text();
+    throw new Error(`API error ${response.status}: ${err}`);
+  }
+
+  const reader = response.body.getReader();
+  const decoder = new TextDecoder();
+  let buffer = "";
+
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+
+    buffer += decoder.decode(value, { stream: true });
+    const lines = buffer.split("\n");
+    buffer = lines.pop();
+
+    for (const line of lines) {
+      if (!line.startsWith("data: ")) continue;
+      const data = line.slice(6).trim();
+      if (data === "[DONE]") continue;
+
+      let event;
+      try { event = JSON.parse(data); } catch { continue; }
+
+      if (event.type === "content_block_start" && event.content_block?.type === "tool_use") {
+        searchIndicator.style.display = "inline";
+        searchIndicator.textContent = "\uD83C\uDF10 Searching the web...";
+      }
+
+      if (event.type === "content_block_stop") {
+        searchIndicator.style.display = "none";
+      }
+
+      if (event.type === "content_block_delta") {
+        if (event.delta?.type === "text_delta") {
+          const text = event.delta.text;
+          fullText += text;
+          outputContent.textContent += text;
+          outputContent.scrollTop = outputContent.scrollHeight;
+        }
+      }
+    }
+  }
+
+  const words = countWords(fullText);
+  setModuleState(index, "done", words);
+  return fullText;
+}
+
+function buildReport(results) {
+  const timestamp = new Date().toISOString();
+  const sections = MODULES.map((m, i) =>
+    `## ${i + 1}. ${m.name}\n\n${results[i]}`
+  );
+
+  return `# SharpenIt \u2014 Market Research & Launch Plan
+**Generated:** ${timestamp}
+**Domain:** sharpenit.com.au
+**ABN:** 19 245 621 227
+
+---
+
+## Executive Summary
+
+This report presents comprehensive market research and a tactical launch plan for SharpenIt, an Australian postal knife sharpening service. The research covers the competitive landscape, target audience analysis, marketing channel recommendations, a 90-day launch plan, campaign strategy, and financial projections.
+
+Key findings and recommended immediate actions are detailed across six research modules below, each grounded in live web research with cited sources.
+
+SharpenIt is positioned to capture an underserved segment of the Australian market with its flat-rate postal model and nationwide coverage.
+
+---
+
+${sections.join("\n\n---\n\n")}
+
+---
+
+*Research conducted with live web search via Anthropic API*
+*SharpenIt \u00b7 sharpenit.com.au \u00b7 ABN 19 245 621 227*
+`;
+}
+
+function downloadReport(report) {
+  const date = new Date().toISOString().split("T")[0];
+  const filename = `sharpenit-launch-plan-${date}.md`;
+  const blob = new Blob([report], { type: "text/markdown" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+async function run() {
+  const apiKey = apiKeyInput.value.trim();
+  if (!apiKey) {
+    showError("Please enter your Anthropic API key.");
+    return;
+  }
+  hideError();
+  startBtn.disabled = true;
+  startBtn.textContent = "Running...";
+
+  renderModuleCards();
+  progressBar.style.display = "block";
+  outputArea.style.display = "block";
+  updateProgress(0, MODULES.length);
+
+  results = [];
+
+  try {
+    for (let i = 0; i < MODULES.length; i++) {
+      const text = await runModule(apiKey, i);
+      results.push(text);
+      updateProgress(i + 1, MODULES.length);
+    }
+
+    fullReport = buildReport(results);
+    downloadBar.style.display = "block";
+    outputTitle.textContent = "All research complete!";
+    outputContent.textContent = "Done. Click the button below to download your full report.";
+
+    if (Notification.permission === "granted") {
+      new Notification("SharpenIt Research Agent", { body: "Research complete! Your report is ready." });
+    } else if (Notification.permission !== "denied") {
+      Notification.requestPermission().then(p => {
+        if (p === "granted") new Notification("SharpenIt Research Agent", { body: "Research complete!" });
+      });
+    }
+  } catch (err) {
+    const failedIndex = results.length;
+    if (failedIndex < MODULES.length) setModuleState(failedIndex, "error");
+    showError(err.message);
+  } finally {
+    startBtn.disabled = false;
+    startBtn.textContent = "Start Research";
+  }
+}
+
+startBtn.addEventListener("click", run);
+apiKeyInput.addEventListener("keydown", e => { if (e.key === "Enter") run(); });
+downloadBtn.addEventListener("click", () => downloadReport(fullReport));
+</script>
 </body>
 </html>
